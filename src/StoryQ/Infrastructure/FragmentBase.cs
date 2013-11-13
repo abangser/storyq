@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing.Text;
 using System.Linq;
+using System.Net.Mime;
 using System.Reflection;
 using StoryQ.Execution;
 using StoryQ.Execution.Rendering;
@@ -103,18 +105,41 @@ namespace StoryQ.Infrastructure
             ExecuteWithReport(new StackFrame(1).GetMethod());
         }
 
+
+        private Result printWithoutExecution(Step step)
+        {
+            return Result.ForResultType(step.Prefix, step.IndentLevel, step.Text, step.Tags, ResultType.NotRun);
+        }
+
         /// <summary>
         /// Runs the current sequence of Steps against a renderer
         /// </summary>
         /// <param name="renderers"></param>
         void IStepContainer.Execute(params IRenderer[] renderers)
         {
-            List<Result> results = ((IStepContainer)this)
-                                   .SelfAndAncestors()
-                                   .Reverse()
-                                   .Select(x => x.Step.Execute())
-                                   .ToList();
+            IEnumerable<IStepContainer> steps = ((IStepContainer) this)
+                                                    .SelfAndAncestors()
+                                                    .Reverse();
 
+            var results = new List<Result>();
+            bool foundFail = false;
+            foreach (var step in steps)
+            {
+                if (!foundFail)
+                {
+                    var tempResult = step.Step.Execute();
+                    results.Add(tempResult);
+                    if (tempResult.Type.Equals(ResultType.Failed))
+                    {
+                        foundFail = true;
+                    }
+                }
+                else
+                {
+                    results.Add(printWithoutExecution(step.Step));
+                }
+
+            }
             Array.ForEach(renderers, x => x.Render(results));
 
             var exception = Exceptions(results, ResultType.Failed)

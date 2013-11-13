@@ -23,6 +23,8 @@ namespace StoryQ.Execution
         /// <summary>
         /// There was an unexpected exception or an assertion failure
         /// </summary>
-        Failed
+        Failed,
+
+        NotRun
     }
 }
