@@ -129,7 +129,7 @@ namespace StoryQ.Infrastructure
                 {
                     var tempResult = step.Step.Execute();
                     results.Add(tempResult);
-                    if (tempResult.Type.Equals(ResultType.Failed))
+                    if (tempResult.Type.Equals(ResultType.Failed) || tempResult.Type.Equals(ResultType.Pending))
                     {
                         foundFail = true;
                     }
