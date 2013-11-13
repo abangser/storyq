@@ -21,7 +21,7 @@ namespace StoryQ.Converter.Wpf.Specifications
 
         protected abstract Feature DescribeStory(Story story);
 
-        protected Scenario Scenario
+        protected GWT Gwt
         {
             [MethodImpl(MethodImplOptions.NoInlining)]
             get

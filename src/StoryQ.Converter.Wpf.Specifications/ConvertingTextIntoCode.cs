@@ -32,7 +32,7 @@ namespace StoryQ.Converter.Wpf.Specifications
         [TestMethod]
         public void ConvertingLinesIntoStringCallsAndCode()
         {
-            Scenario
+            Gwt
                     .Given(ThatIHaveLaunchedStoryq)
                     .When(ITypeInSomeStoryText)
                     .And(ITypeInSomeScenarioText)
@@ -43,7 +43,7 @@ namespace StoryQ.Converter.Wpf.Specifications
         [TestMethod]
         public void ConvertingLinesIntoStringCallsAndCodeWithAliases()
         {
-            Scenario
+            Gwt
                     .Given(ThatIHaveLaunchedStoryq)
                     .When(ITypeInSomeStoryTextWithAliases)
                     .And(ITypeInSomeScenarioTextWithAliases)
@@ -54,7 +54,7 @@ namespace StoryQ.Converter.Wpf.Specifications
         [TestMethod]
         public void ConvertingLinesAndVariablesIntoCode()
         {
-            Scenario
+            Gwt
                     .Given(ThatIHaveLaunchedStoryq)
                     .When(ITypeInSomeStoryText)
                     .And(ITypeInSomeScenarioTextWithADollarSymbolBeforeANumberOrWord)
@@ -65,7 +65,7 @@ namespace StoryQ.Converter.Wpf.Specifications
 	 [TestMethod]
         public void ConvertingNegativeIntegerIntoCode()
         {
-            Scenario
+            Gwt
                     .Given(ThatIHaveLaunchedStoryq)
                     .When(ITypeInSomeStoryText)
                     .And(ITypeInSomeScenarioTextWithANegativeInteger)
@@ -76,7 +76,7 @@ namespace StoryQ.Converter.Wpf.Specifications
 	 [TestMethod]
         public void ConvertingNegativeDoubleIntoCode()
         {
-            Scenario
+            Gwt
                     .Given(ThatIHaveLaunchedStoryq)
                     .When(ITypeInSomeStoryText)
                     .And(ITypeInSomeScenarioTextWithANegativeDouble)
@@ -88,7 +88,7 @@ namespace StoryQ.Converter.Wpf.Specifications
         [TestMethod]
         public void ConvertingLinesWithComplexVariablesIntoCode()
         {
-            Scenario
+            Gwt
                     .Given(ThatIHaveLaunchedStoryq)
                     .When(ITypeInSomeStoryText)
                     .And(ITypeInSomeScenarioTextWithDatesAndStringsInCurlyBraces)
@@ -100,7 +100,7 @@ namespace StoryQ.Converter.Wpf.Specifications
         [TestMethod]
         public void GeneratingTestMethods()
         {
-            Scenario
+            Gwt
                 .Given(ThatIHaveStoryAndScenarioText)
                 .When(ISetTheOutputTypeTo_, GenerationLevel.TestMethod)
                 .Then(IShouldHaveMyMethodGenerated)
@@ -110,7 +110,7 @@ namespace StoryQ.Converter.Wpf.Specifications
         [TestMethod]
         public void GeneratingTestMethodsAndStepStubs()
         {
-            Scenario
+            Gwt
                 .Given(ThatIHaveStoryAndScenarioText)
                 .When(ISetTheOutputTypeTo_, GenerationLevel.TestMethodAndStepStubs)
                 .Then(IShouldHaveMyMethodAndStepsGenerated)
@@ -120,7 +120,7 @@ namespace StoryQ.Converter.Wpf.Specifications
         [TestMethod]
         public void GeneratingEntireClasses()
         {
-            Scenario
+            Gwt
                 .Given(ThatIHaveStoryAndScenarioText)
                 .When(ISetTheOutputTypeTo_, GenerationLevel.Class)
                 .Then(IShouldHaveMyClassGenerated)

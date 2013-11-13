@@ -26,7 +26,7 @@ namespace StoryQ.Demo
         public void Test1()
         {
 
-            Outcome outcome = new Story("Blah")
+            GWT gwt = new Story("Blah")
                 .InOrderTo("Blah")
                 .AsA("Blah")
                 .IWant("Blah")
@@ -39,15 +39,15 @@ namespace StoryQ.Demo
             {
                 for (int i = 0; i < 1000; i++)
                 {
-                    outcome = outcome.WithScenario("Blah " + i)
-                        .Given(TheMethodToCall)
-                        .When(TheMethodToCall)
-                        .Then(TheMethodToCall);
+//                    gwt = gwt.WithScenario("Blah " + i)
+//                        .Given(TheMethodToCall)
+//                        .When(TheMethodToCall)
+//                        .Then(TheMethodToCall);
                 }
             }
             using (new CodeTimer("running 1000 scenarios"))
             {
-                outcome.Execute();
+                gwt.Execute();
             }
         }
 

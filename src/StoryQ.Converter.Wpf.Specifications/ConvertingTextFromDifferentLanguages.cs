@@ -23,7 +23,7 @@ namespace StoryQ.Converter.Wpf.Specifications
         [Test]
         public void SavingTheStoryQDllFromTheConverter()
         {
-            Scenario
+            Gwt
                 .Given(ThatIHaveLaunchedStoryq)
                 .When(IClickTheSaveLibrariesButton)
                 .Then(TheStoryQDllShouldBeSavedIntoTheDirectoryIChoose)
@@ -33,7 +33,7 @@ namespace StoryQ.Converter.Wpf.Specifications
         [Test]
         public void ListingAvailableLanguages()
         {
-            Scenario
+            Gwt
                 .Given(ThatIHaveLaunchedStoryq)
                 .When(ThereAreLanguagePacksAvailable)
                 .Then(IShouldSeeTheLanguagePacksInAList)
@@ -43,7 +43,7 @@ namespace StoryQ.Converter.Wpf.Specifications
         [Test]
         public void SelectingALocalLanguagePack()
         {
-            Scenario
+            Gwt
                 .Given(ThereAreLanguagePacksInAList)
                 .When(ISelectANewLocalLanguagePack)
                 .Then(TheConverterShouldWorkWithTheNewLanguagePack)
@@ -53,7 +53,7 @@ namespace StoryQ.Converter.Wpf.Specifications
         [Test]
         public void SelectingARemoteLanguagePack()
         {
-            Scenario
+            Gwt
                 .Given(ThereAreLanguagePacksInAList)
                 .When(ISelectANewRemoteLanguagePack)
                 .Then(TheConverterShouldDownloadTheNewLanguagePack)
