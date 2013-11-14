@@ -105,12 +105,6 @@ namespace StoryQ.Infrastructure
             ExecuteWithReport(new StackFrame(1).GetMethod());
         }
 
-
-        private Result printWithoutExecution(Step step)
-        {
-            return Result.ForResultType(step.Prefix, step.IndentLevel, step.Text, step.Tags, ResultType.NotRun);
-        }
-
         /// <summary>
         /// Runs the current sequence of Steps against a renderer
         /// </summary>
@@ -121,14 +115,14 @@ namespace StoryQ.Infrastructure
                                                     .SelfAndAncestors()
                                                     .Reverse();
 
-            var results = new List<Result>();
+            var resultsList = new List<Result>();
             bool foundFail = false;
-            foreach (var step in steps)
+            foreach (var stepContainer in steps)
             {
                 if (!foundFail)
                 {
-                    var tempResult = step.Step.Execute();
-                    results.Add(tempResult);
+                    var tempResult = stepContainer.Step.Execute();
+                    resultsList.Add(tempResult);
                     if (tempResult.Type.Equals(ResultType.Failed) || tempResult.Type.Equals(ResultType.Pending))
                     {
                         foundFail = true;
@@ -136,14 +130,14 @@ namespace StoryQ.Infrastructure
                 }
                 else
                 {
-                    results.Add(printWithoutExecution(step.Step));
+                    resultsList.Add(printWithoutExecution(stepContainer.Step));
                 }
 
             }
-            Array.ForEach(renderers, x => x.Render(results));
+            Array.ForEach(renderers, x => x.Render(resultsList));
 
-            var exception = Exceptions(results, ResultType.Failed)
-                            .Concat(Exceptions(results, ResultType.Pending))
+            var exception = Exceptions(resultsList, ResultType.Failed)
+                            .Concat(Exceptions(resultsList, ResultType.Pending))
                             .FirstOrDefault();
 
             if (exception != null)
@@ -151,6 +145,11 @@ namespace StoryQ.Infrastructure
                 ExceptionHelper.TryForceStackTracePermanence(exception, "-- End of original stack trace, test framework stack trace follows: --");
                 throw exception;
             }
+        }
+
+        private Result printWithoutExecution(Step step)
+        {
+            return Result.ForResultType(step.Prefix, step.IndentLevel, step.Text, step.Tags, ResultType.NotRun);
         }
 
         private static IEnumerable<Exception> Exceptions(IEnumerable<Result> results, ResultType type)

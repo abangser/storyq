@@ -723,6 +723,22 @@ namespace StoryQ
             Step s = new Step("and", 5, text, null);
             return new GWT(s, this);
         }
+
+        /// <summary>
+        /// with scenario [Scenario].
+        /// Add another scenario to this story. StoryQ executes these scenarios one after the other, so state can be shared between a single story's scenarios.
+        /// </summary>
+        /// <param name="text">
+        /// A textual description. This story fragment is not executable.
+        /// </param>
+        /// <returns>The next fragment of your story, a <see cref="Scenario"/></returns>
+        [Description("Add another scenario to this story. StoryQ executes these scenarios one after the other, so state can be shared between a single story's scenarios.")]
+        [Alias("Scenario:")]
+        public GWT WithScenario(string text)
+        {
+            Step s = new Step("with scenario", 3, text, Step.DoNothing);
+            return new GWT(s, this);
+        }
     }
 
     /// <summary>
