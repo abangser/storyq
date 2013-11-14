@@ -134,6 +134,7 @@ namespace StoryQ.Infrastructure
                 }
 
             }
+
             Array.ForEach(renderers, x => x.Render(resultsList));
 
             var exception = Exceptions(resultsList, ResultType.Failed)
